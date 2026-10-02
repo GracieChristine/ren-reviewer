@@ -1,0 +1,16 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="112" fill="#1a1f2e"/>
+  <!-- Round reading glasses centered above REN -->
+  <circle cx="176" cy="152" r="54" fill="none" stroke="#8b7fcc" stroke-width="11"/>
+  <circle cx="336" cy="152" r="54" fill="none" stroke="#8b7fcc" stroke-width="11"/>
+  <line x1="230" y1="152" x2="282" y2="152" stroke="#8b7fcc" stroke-width="11"/>
+  <line x1="122" y1="138" x2="92" y2="124" stroke="#8b7fcc" stroke-width="9" stroke-linecap="round"/>
+  <line x1="390" y1="138" x2="420" y2="124" stroke="#8b7fcc" stroke-width="9" stroke-linecap="round"/>
+  <!-- REN -->
+  <text x="256" y="316" font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="162" font-weight="700"
+        fill="#ddd7ef" text-anchor="middle" letter-spacing="-2">REN</text>
+  <!-- Divider + subtitle -->
+  <line x1="108" y1="348" x2="404" y2="348" stroke="#8b7fcc" stroke-width="6" opacity="0.4"/>
+  <text x="256" y="408" font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="38" font-weight="400"
+        fill="#8b7fcc" text-anchor="middle" letter-spacing="8">REVIEWER</text>
+</svg>

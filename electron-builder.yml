@@ -1,0 +1,40 @@
+appId: com.poppulo.renovate-reviewer
+productName: "Ren, the Reviewer"
+copyright: Copyright © 2026 Grace Li
+
+directories:
+  output: release
+  buildResources: assets
+
+files:
+  # Compiled server + electron JS
+  - dist/server/**
+  - dist/electron/**
+  # Root package.json (needed by Node require resolution)
+  - package.json
+  # node_modules — only production deps (electron-builder prunes devDeps)
+  - node_modules/**
+
+# Ship the built React app as an extra resource (served by Express in production)
+extraResources:
+  - from: dist/client
+    to: client
+
+win:
+  target:
+    - target: nsis
+      arch: [x64]
+  icon: assets/icon.ico
+
+mac:
+  target:
+    - target: dmg
+      arch: [x64, arm64]
+  icon: assets/icon.icns
+  category: public.app-category.developer-tools
+
+nsis:
+  oneClick: true
+  installerLanguages: [en_US]
+  createDesktopShortcut: true
+  runAfterFinish: true

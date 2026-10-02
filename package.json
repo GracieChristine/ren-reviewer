@@ -1,0 +1,40 @@
+{
+  "name": "renovate-reviewer",
+  "version": "0.4.3",
+  "description": "Local dashboard for reviewing Renovate MRs — changelog lookup, CI status, and merge verdict",
+  "author": "Grace Li",
+  "private": true,
+  "main": "dist/electron/main.js",
+  "scripts": {
+    "dev": "node scripts/dev.js",
+    "server": "node_modules/.bin/ts-node-dev --respawn --transpile-only --project server/tsconfig.json server/index.ts",
+    "client": "client/node_modules/.bin/vite --config client/vite.config.ts",
+    "build": "tsc -p tsconfig.electron.json && npx --prefix client vite build --config client/vite.config.ts",
+    "electron:dev": "concurrently --kill-others \"node_modules/.bin/ts-node-dev --respawn --transpile-only --project server/tsconfig.json server/index.ts\" \"client/node_modules/.bin/vite --config client/vite.config.ts\" \"node_modules/.bin/wait-on tcp:8000 && node_modules/.bin/electron .\"",
+    "build:icons": "node scripts/build-icons.js",
+    "release": "node scripts/release.js",
+    "electron:pack": "npm version patch --no-git-tag-version && npm run build && electron-builder",
+    "electron:pack:minor": "npm version minor --no-git-tag-version && npm run build && electron-builder",
+    "electron:pack:major": "npm version major --no-git-tag-version && npm run build && electron-builder",
+    "start": "node dist/server/index.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.14.0",
+    "concurrently": "^8.2.2",
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3",
+    "to-ico": "^1.1.5",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.5.2",
+    "wait-on": "^7.2.0"
+  }
+}
