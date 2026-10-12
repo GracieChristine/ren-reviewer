@@ -1,44 +1,17 @@
-# Renovate Reviewer
+# Ren, the Reviewer
 
-A local web dashboard for reviewing open Renovate MRs — fetches changelog data, checks CI status, and gives a clear merge verdict for each MR.
+A desktop app for reviewing open Renovate merge requests on GitLab — fetches changelog data, checks CI status, and gives a clear merge verdict for each MR.
 
-## What it does
+## Features
 
-1. Connects to GitLab using your personal access token (held in memory only, never stored)
-2. Finds all open Renovate-authored MRs in the selected repo
-3. For each MR: fetches changelog from npm/GitHub, detects breaking changes, checks CI status
-4. Displays a colour-coded verdict: ✅ Safe to merge / ⚠️ Review needed / ❌ Blocked
+- Connects to GitLab with your personal access token (held in memory only, never stored)
+- Finds all open Renovate-authored MRs in the selected repo
+- For each MR: fetches changelog from npm/GitHub, detects breaking changes, checks CI status
+- Colour-coded verdict: ✅ Safe to merge / ⚠️ Review needed / ❌ Blocked
 
-## Setup
+## Download
 
-```bash
-# 1. Install dependencies (run once)
-cd renovate-reviewer
-npm install
-cd client && npm install && cd ..
-
-# 2. Copy the env file (no values needed — token is entered in the UI)
-cp .env.example .env
-
-# 3. Start the app
-npm run dev
-```
-
-Then open http://localhost:5173 in your browser.
-
-## Pinned repositories
-
-The repo selector includes two pre-pinned repos:
-- `players-automated-tests`
-- `digital-signage-cloud-tests`
-
-You can also enter any custom GitLab project path (e.g. `namespace/group/project-name`).
-
-## GitLab token
-
-Create a token at: https://gitlab.com/-/user_settings/personal_access_tokens
-
-Required scope: **read_api** (read-only is enough to fetch MRs and pipeline status)
+Grab the latest installer from [Releases](../../releases).
 
 ## Verdict logic
 
@@ -51,6 +24,36 @@ Required scope: **read_api** (read-only is enough to fetch MRs and pipeline stat
 | Minor bump (CI passed) | ⚠️ Review (skim changelog) |
 | Patch bump + CI passed + no breaking | ✅ Safe |
 
-## Future: desktop app
+## GitLab token
 
-The plan is to wrap this in Electron so it launches as a standalone desktop app — the Express server starts automatically when you open the app, and stops when you close it. No browser tab needed.
+Create a token at: https://gitlab.com/-/user_settings/personal_access_tokens
+
+Required scope: **read_api** (read-only — fetches MRs and pipeline status only)
+
+## Pinned repositories
+
+The repo selector includes two pre-pinned repos:
+- `players-automated-tests`
+- `digital-signage-cloud-tests`
+
+Any custom GitLab project path also works (e.g. `namespace/group/project-name`).
+
+## Development
+
+```bash
+cd ren-reviewer
+npm install
+cd client && npm install && cd ..
+cp .env.example .env
+npm run dev
+```
+
+## Build installer
+
+```bash
+npm run electron:pack        # patch version bump + NSIS installer
+npm run electron:pack:minor  # minor version bump
+npm run electron:pack:major  # major version bump
+```
+
+Output goes to `release/`.
