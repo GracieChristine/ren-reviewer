@@ -1,6 +1,6 @@
 {
   "name": "renovate-reviewer",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "Local dashboard for reviewing Renovate MRs — changelog lookup, CI status, and merge verdict",
   "author": "Grace Li",
   "private": true,
